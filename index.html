@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>이진풍경출판사</title>
+<meta name="description" content="이진풍경출판사 홈페이지 시안">
+<style>
+  :root { --bg:#faf8f4; --fg:#222; --muted:#666; --line:#ddd6c8; --accent:#8a3b1e; --banner:#222; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#17150f; --fg:#eee9df; --muted:#aaa397; --line:#3a352a; --accent:#e0a07f; --banner:#000; }
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--fg); line-height:1.8;
+         font-family:"Noto Serif KR","Nanum Myeongjo","Batang",serif; }
+  .banner { background:var(--banner); color:#fff; text-align:center; font-size:.85rem; padding:.4rem 1rem;
+            font-family:system-ui,"Malgun Gothic",sans-serif; }
+  main, footer { max-width:44rem; margin:0 auto; padding:0 16px; }
+  header { padding:4rem 0 2rem; }
+  h1 { font-size:2rem; margin:0; letter-spacing:.05em; }
+  h2 { font-size:1.15rem; margin:0 0 1rem; padding-bottom:.4rem; border-bottom:1px solid var(--line); color:var(--accent); }
+  section { padding:2rem 0; }
+  .book { display:flex; gap:2rem; flex-wrap:wrap; align-items:flex-start; }
+  .book img { width:14rem; max-width:100%; height:auto; box-shadow:0 2px 12px rgba(0,0,0,.2); }
+  .book h3 { margin:0 0 .5rem; font-size:1.25rem; }
+  dl { margin:0 0 1.25rem; display:grid; grid-template-columns:5rem 1fr; gap:.2rem 1rem; color:var(--muted); }
+  dt { font-weight:bold; }
+  dd { margin:0; }
+  .btn { display:inline-block; padding:.5rem 1.2rem; border:1px solid var(--line); color:var(--muted);
+         font-family:system-ui,"Malgun Gothic",sans-serif; font-size:.9rem; }
+  a { color:var(--accent); }
+  :focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  footer { padding:2rem 16px 3rem; border-top:1px solid var(--line); color:var(--muted); font-size:.85rem; }
+</style>
+</head>
+<body>
+<div class="banner" role="note">시안 · 검증용 — 정식 홈페이지가 아닙니다</div>
+<main>
+  <header>
+    <h1>이진풍경출판사</h1>
+  </header>
+
+  <section id="about">
+    <h2>출판사 소개</h2>
+    <p>이진풍경출판사는 서울 동작구에서 2026년 9월 문을 연 출판사입니다. 인공지능과 사람이 함께 사는 시대를 다루는 책을 전자책으로 펴냅니다.</p>
+  </section>
+
+  <section id="books">
+    <h2>도서</h2>
+    <div class="book">
+      <img src="cover.jpg" alt="『Human-AI Symbiosis: 공존 2』 표지" width="651" height="921">
+      <div>
+        <h3>Human-AI Symbiosis: 공존 2</h3>
+        <dl>
+          <dt>발행일</dt><dd>2026년 10월 3일</dd>
+          <dt>형태</dt><dd>전자책 · 147쪽</dd>
+          <dt>가격</dt><dd>9,900원</dd>
+          <dt>ISBN</dt><dd>979-11-2216-701-6</dd>
+        </dl>
+        <!-- 예스24 주소 확보 시 span을 <a class="btn" href="..."> 로 교체 -->
+        <span class="btn" aria-disabled="true">예스24에서 구매 (준비 중)</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>문의</h2>
+    <p><a href="mailto:leemet97@gmail.com">leemet97@gmail.com</a></p>
+  </section>
+</main>
+<footer>
+  <p>이진풍경출판사 · 서울특별시 동작구<br>출판사 신고번호 251002026000065</p>
+</footer>
+</body>
+</html>
