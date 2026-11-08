@@ -23,7 +23,7 @@
           background:var(--seal); color:#fbeee8; display:grid; grid:1fr 1fr / 1fr 1fr; place-items:center; font:900 .95rem/1 "Noto Serif KR",serif; border-radius:2px; }
   .sun { position:absolute; width:8rem; height:8rem; border-radius:50%; background:#ecd5c9; right:32%; top:20%; opacity:.8; }
   .land { position:absolute; left:0; bottom:0; width:100%; height:58%; }
-  #bits { position:absolute; left:0; bottom:0; width:100%; height:58%; animation:fade 1.6s ease 1.2s both; pointer-events:none; }
+  #bits { position:absolute; left:0; bottom:0; width:100%; height:58%; animation:fade 1.2s ease 2.3s both; pointer-events:none; }
   @keyframes fade { from { opacity:0; } to { opacity:1; } }
   .layer { animation:rise 1.8s cubic-bezier(.2,.7,.2,1) both; }
   .layer.l2 { animation-delay:.25s; } .layer.l3 { animation-delay:.5s; }
@@ -36,14 +36,14 @@
   .book img { width:14rem; max-width:100%; height:auto; box-shadow:0 14px 28px -12px rgba(31,47,53,.45); }
   .book h3 { margin:0 0 .6rem; font:900 1.3rem/1.4 "Noto Serif KR",serif; }
   dl { margin:0 0 1.4rem; display:grid; grid-template-columns:5rem 1fr; gap:.15rem 1rem; }
-  dt { color:var(--cela); font-weight:900; } dd { margin:0; }
-  .btn { display:inline-block; padding:.45rem 1.2rem; border:1px solid var(--cela); color:#4f6b64; font:.9rem system-ui,"Malgun Gothic",sans-serif; }
+  dt { color:#4f6b64; font-weight:900; } dd { margin:0; }
+  .btn { display:inline-block; padding:.45rem 1.2rem; border:1px solid var(--cela); color:#4f6b64; background:none; cursor:default; font:.9rem system-ui,"Malgun Gothic",sans-serif; }
   .book > a { display:block; line-height:0; }
   a { color:var(--seal); text-underline-offset:.25em; }
   :focus-visible { outline:2px solid var(--seal); outline-offset:3px; }
   footer { margin-top:3rem; background:var(--ink); color:var(--far); font-size:.85rem; padding:2rem 0 2.5rem; }
   footer p { margin:0; }
-  @media (max-width:560px) { .hero { height:auto; min-height:38rem; } .hero p { max-width:calc(100% - 7rem); font-size:.95rem; } .sun { right:12%; top:48%; } }
+  @media (max-width:560px) { .hero { height:auto; min-height:38rem; } .hero p { max-width:calc(100% - 2*var(--gut) - 7rem); font-size:.95rem; } .sun { right:12%; top:48%; } }
   @media (prefers-reduced-motion:reduce) { .layer, #bits { animation:none; } }
 </style>
 </head>
@@ -76,8 +76,8 @@
           <dt>가격</dt><dd>9,900원</dd>
           <dt>ISBN</dt><dd>979-11-2216-701-6</dd>
         </dl>
-        <!-- 예스24 주소 확보 시 span을 <a class="btn" href="..."> 로 교체 -->
-        <span class="btn" aria-disabled="true">예스24에서 구매 (준비 중)</span>
+        <!-- 예스24 주소 확보 시 button을 <a class="btn" href="..."> 로 교체 -->
+        <button class="btn" disabled>예스24에서 구매 (준비 중)</button>
       </div>
     </div>
   </section>
@@ -89,17 +89,16 @@
 <footer><div><p>이진풍경출판사 · 경기도 화성시 동탄구<br>출판사 신고번호 251002026000171</p></div></footer>
 
 <script>
-  // 산 그림(위 svg와 같은 경로) 안쪽에만 0/1 글자를 연하게 겹쳐 그린다.
+  // 산 그림 안쪽에만 0/1 글자를 연하게 겹쳐 그린다. 경로는 위 svg에서 읽는다.
   const cv = document.getElementById('bits'), ctx = cv.getContext('2d');
   const CELL = 13;
-  // [경로, 글자색]: 밝은 산엔 흰 글자, 어두운 맨 앞 산엔 연한 청자색 글자
-  const layers = [
-    ['M0,220 C120,150 200,170 320,120 C420,80 500,150 620,130 C760,100 840,60 960,110 C1060,150 1120,130 1200,150 L1200,300 L0,300Z', 'rgba(255,255,255,.38)'],
-    ['M0,250 C100,210 220,230 340,190 C460,150 540,230 700,200 C820,175 940,140 1060,190 C1120,210 1160,200 1200,205 L1200,300 L0,300Z', 'rgba(255,255,255,.30)'],
-    ['M0,285 C150,260 260,275 420,255 C580,235 700,280 860,262 C980,250 1100,262 1200,270 L1200,300 L0,300Z', 'rgba(185,204,200,.28)']
-  ].map(([d, c]) => ({ p: new Path2D(d), c }));
+  // 글자색: 밝은 산엔 흰 글자, 어두운 맨 앞 산엔 연한 청자색 글자
+  const colors = ['rgba(255,255,255,.38)', 'rgba(255,255,255,.30)', 'rgba(185,204,200,.28)'];
+  const layers = [...document.querySelectorAll('.land .layer')]
+    .map((el, i) => ({ p: new Path2D(el.getAttribute('d')), c: colors[i] }));
   function draw() {
     const dpr = devicePixelRatio || 1, r = cv.getBoundingClientRect(), w = r.width, h = r.height;
+    if (!w || !h) return;
     cv.width = w * dpr; cv.height = h * dpr;
     ctx.font = `700 ${CELL - 2}px monospace`; ctx.textBaseline = 'top';
     for (const { p, c } of layers) {
@@ -113,8 +112,7 @@
       ctx.restore();
     }
   }
-  draw();
-  let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(draw, 150); });
+  let rt; new ResizeObserver(() => { clearTimeout(rt); rt = setTimeout(draw, 150); }).observe(cv);
 </script>
 </body>
 </html>
