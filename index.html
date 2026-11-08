@@ -5,51 +5,69 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
 <title>이진풍경출판사</title>
-<meta name="description" content="이진풍경출판사 홈페이지 시안">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;900&display=swap" rel="stylesheet">
 <style>
-  :root { --bg:#faf8f4; --fg:#222; --muted:#666; --line:#ddd6c8; --accent:#8a3b1e; --banner:#222; }
-  @media (prefers-color-scheme: dark) {
-    :root { --bg:#17150f; --fg:#eee9df; --muted:#aaa397; --line:#3a352a; --accent:#e0a07f; --banner:#000; }
-  }
-  * { box-sizing: border-box; }
-  body { margin:0; background:var(--bg); color:var(--fg); line-height:1.8;
-         font-family:"Noto Serif KR","Nanum Myeongjo","Batang",serif; }
-  .banner { background:var(--banner); color:#fff; text-align:center; font-size:.85rem; padding:.4rem 1rem;
-            font-family:system-ui,"Malgun Gothic",sans-serif; }
-  main, footer { max-width:44rem; margin:0 auto; padding:0 16px; }
-  header { padding:4rem 0 2rem; }
-  h1 { font-size:2rem; margin:0; letter-spacing:.05em; }
-  h2 { font-size:1.15rem; margin:0 0 1rem; padding-bottom:.4rem; border-bottom:1px solid var(--line); color:var(--accent); }
-  section { padding:2rem 0; }
-  .book { display:flex; gap:2rem; flex-wrap:wrap; align-items:flex-start; }
-  .book img { width:14rem; max-width:100%; height:auto; box-shadow:0 2px 12px rgba(0,0,0,.2); }
-  .book h3 { margin:0 0 .5rem; font-size:1.25rem; }
-  dl { margin:0 0 1.25rem; display:grid; grid-template-columns:5rem 1fr; gap:.2rem 1rem; color:var(--muted); }
-  dt { font-weight:bold; }
-  dd { margin:0; }
-  .btn { display:inline-block; padding:.5rem 1.2rem; border:1px solid var(--line); color:var(--muted);
-         font-family:system-ui,"Malgun Gothic",sans-serif; font-size:.9rem; }
-  a { color:var(--accent); }
-  :focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
-  footer { padding:2rem 16px 3rem; border-top:1px solid var(--line); color:var(--muted); font-size:.85rem; }
+  /* 디자인 1 · 수묵 풍경: 안개 위로 겹쳐 오르는 산, 세로쓰기 사명, 낙관 */
+  :root { --mist:#e3e9e7; --sky:#f1f4f2; --far:#b9ccc8; --cela:#7fa39a; --ink:#1f2f35; --seal:#b4423a; --gut:max(16px,6vw); }
+  * { box-sizing:border-box; }
+  body { word-break:keep-all; margin:0; background:var(--mist); color:var(--ink); font:400 1.05rem/1.95 "Noto Serif KR","Nanum Myeongjo",serif; }
+  .banner { background:var(--ink); color:var(--sky); text-align:center; font:.85rem/1 system-ui,"Malgun Gothic",sans-serif; padding:.6rem 1rem; }
+
+  .hero { position:relative; min-height:34rem; height:80vh; overflow:hidden; background:linear-gradient(var(--sky),var(--mist) 75%); }
+  .hero p { position:absolute; left:var(--gut); top:3rem; margin:0; max-width:21rem; z-index:2; }
+  .hero h1 { position:absolute; right:var(--gut); top:2.5rem; margin:0; z-index:2; writing-mode:vertical-rl;
+             font:900 clamp(2.2rem,6vw,4.2rem)/1.2 "Noto Serif KR",serif; letter-spacing:.14em; }
+  .seal { position:absolute; top:2.5rem; right:calc(var(--gut) + clamp(3.6rem,8.5vw,6rem)); z-index:2; width:3.1rem; height:3.1rem; padding:3px;
+          background:var(--seal); color:#fbeee8; display:grid; grid:1fr 1fr / 1fr 1fr; place-items:center; font:900 .95rem/1 "Noto Serif KR",serif; border-radius:2px; }
+  .sun { position:absolute; width:8rem; height:8rem; border-radius:50%; background:#ecd5c9; right:32%; top:20%; opacity:.8; }
+  .land { position:absolute; left:0; bottom:0; width:100%; height:58%; }
+  #bits { position:absolute; left:0; bottom:0; width:100%; height:58%; animation:fade 1.6s ease 1.2s both; pointer-events:none; }
+  @keyframes fade { from { opacity:0; } to { opacity:1; } }
+  .layer { animation:rise 1.8s cubic-bezier(.2,.7,.2,1) both; }
+  .layer.l2 { animation-delay:.25s; } .layer.l3 { animation-delay:.5s; }
+  @keyframes rise { from { opacity:0; transform:translateY(40px); } to { opacity:1; transform:none; } }
+
+  main, footer > div { max-width:46rem; margin:0 auto; padding:0 16px; }
+  section { padding:3rem 0 1rem; }
+  h2 { margin:0 0 1.2rem; font:900 1.25rem/1.4 "Noto Serif KR",serif; }
+  .book { display:flex; gap:2.2rem; flex-wrap:wrap; align-items:flex-start; }
+  .book img { width:14rem; max-width:100%; height:auto; box-shadow:0 14px 28px -12px rgba(31,47,53,.45); }
+  .book h3 { margin:0 0 .6rem; font:900 1.3rem/1.4 "Noto Serif KR",serif; }
+  dl { margin:0 0 1.4rem; display:grid; grid-template-columns:5rem 1fr; gap:.15rem 1rem; }
+  dt { color:var(--cela); font-weight:900; } dd { margin:0; }
+  .btn { display:inline-block; padding:.45rem 1.2rem; border:1px solid var(--cela); color:#4f6b64; font:.9rem system-ui,"Malgun Gothic",sans-serif; }
+  .book > a { display:block; line-height:0; }
+  a { color:var(--seal); text-underline-offset:.25em; }
+  :focus-visible { outline:2px solid var(--seal); outline-offset:3px; }
+  footer { margin-top:3rem; background:var(--ink); color:var(--far); font-size:.85rem; padding:2rem 0 2.5rem; }
+  footer p { margin:0; }
+  @media (max-width:560px) { .hero { height:auto; min-height:38rem; } .hero p { max-width:calc(100% - 7rem); font-size:.95rem; } .sun { right:12%; top:48%; } }
+  @media (prefers-reduced-motion:reduce) { .layer, #bits { animation:none; } }
 </style>
 </head>
 <body>
 <div class="banner" role="note">시안 · 검증용 — 정식 홈페이지가 아닙니다</div>
+
+<header class="hero">
+  <p>이진풍경출판사는 2026년 9월 문을 연 출판사입니다. 인공지능과 사람이 함께 사는 시대를 다루는 책을 전자책으로 펴냅니다.</p>
+  <div class="seal" aria-hidden="true"><span>이</span><span>진</span><span>풍</span><span>경</span></div>
+  <h1>이진풍경출판사</h1>
+  <div class="sun" aria-hidden="true"></div>
+  <svg class="land" viewBox="0 0 1200 300" preserveAspectRatio="none" aria-hidden="true">
+    <path class="layer l1" fill="var(--far)" d="M0,220 C120,150 200,170 320,120 C420,80 500,150 620,130 C760,100 840,60 960,110 C1060,150 1120,130 1200,150 L1200,300 L0,300Z"/>
+    <path class="layer l2" fill="var(--cela)" opacity=".85" d="M0,250 C100,210 220,230 340,190 C460,150 540,230 700,200 C820,175 940,140 1060,190 C1120,210 1160,200 1200,205 L1200,300 L0,300Z"/>
+    <path class="layer l3" fill="var(--ink)" d="M0,285 C150,260 260,275 420,255 C580,235 700,280 860,262 C980,250 1100,262 1200,270 L1200,300 L0,300Z"/>
+  </svg>
+  <canvas id="bits" aria-hidden="true"></canvas>
+</header>
+
 <main>
-  <header>
-    <h1>이진풍경출판사</h1>
-  </header>
-
-  <section id="about">
-    <h2>출판사 소개</h2>
-    <p>이진풍경출판사는 서울 동작구에서 2026년 9월 문을 연 출판사입니다. 인공지능과 사람이 함께 사는 시대를 다루는 책을 전자책으로 펴냅니다.</p>
-  </section>
-
   <section id="books">
     <h2>도서</h2>
     <div class="book">
-      <img src="cover.jpg" alt="『Human-AI Symbiosis: 공존 2』 표지" width="651" height="921">
+      <a href="book.html"><img src="cover.jpg" alt="『Human-AI Symbiosis: 공존 2』 표지 — 책 소개 보기" width="651" height="921"></a>
       <div>
         <h3>Human-AI Symbiosis: 공존 2</h3>
         <dl>
@@ -63,14 +81,40 @@
       </div>
     </div>
   </section>
-
   <section id="contact">
     <h2>문의</h2>
     <p><a href="mailto:leemet97@gmail.com">메일로 문의하기</a></p>
   </section>
 </main>
-<footer>
-  <p>이진풍경출판사 · 서울특별시 동작구<br>출판사 신고번호 251002026000065</p>
-</footer>
+<footer><div><p>이진풍경출판사 · 경기도 화성시 동탄구<br>출판사 신고번호 251002026000171</p></div></footer>
+
+<script>
+  // 산 그림(위 svg와 같은 경로) 안쪽에만 0/1 글자를 연하게 겹쳐 그린다.
+  const cv = document.getElementById('bits'), ctx = cv.getContext('2d');
+  const CELL = 13;
+  // [경로, 글자색]: 밝은 산엔 흰 글자, 어두운 맨 앞 산엔 연한 청자색 글자
+  const layers = [
+    ['M0,220 C120,150 200,170 320,120 C420,80 500,150 620,130 C760,100 840,60 960,110 C1060,150 1120,130 1200,150 L1200,300 L0,300Z', 'rgba(255,255,255,.38)'],
+    ['M0,250 C100,210 220,230 340,190 C460,150 540,230 700,200 C820,175 940,140 1060,190 C1120,210 1160,200 1200,205 L1200,300 L0,300Z', 'rgba(255,255,255,.30)'],
+    ['M0,285 C150,260 260,275 420,255 C580,235 700,280 860,262 C980,250 1100,262 1200,270 L1200,300 L0,300Z', 'rgba(185,204,200,.28)']
+  ].map(([d, c]) => ({ p: new Path2D(d), c }));
+  function draw() {
+    const dpr = devicePixelRatio || 1, r = cv.getBoundingClientRect(), w = r.width, h = r.height;
+    cv.width = w * dpr; cv.height = h * dpr;
+    ctx.font = `700 ${CELL - 2}px monospace`; ctx.textBaseline = 'top';
+    for (const { p, c } of layers) {
+      ctx.save();
+      ctx.setTransform(dpr * w / 1200, 0, 0, dpr * h / 300, 0, 0); ctx.clip(p);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.fillStyle = c;
+      for (let y = 0, i = 0; y < h; y += CELL, i++)
+        for (let x = 0, j = 0; x < w; x += CELL, j++)
+          ctx.fillText((i * 13 + j * 7 + ((i * j) % 5)) % 2 ? '1' : '0', x, y);
+      ctx.restore();
+    }
+  }
+  draw();
+  let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(draw, 150); });
+</script>
 </body>
 </html>
