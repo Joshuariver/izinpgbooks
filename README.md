@@ -13,13 +13,13 @@
 ## 폴더 구조
 | 경로 | 내용 | 공개 여부 |
 |---|---|---|
-| `site/` | 게시할 사이트. **이 폴더만 git 저장소** (`origin`: `Joshuariver/izinpgbooks`) | 공개 대상 |
+| `site/` | 게시할 사이트. **이 폴더만 git 저장소** (`origin`: `Joshuariver/ezinpgbooks`) | 공개 대상 |
 | `design/` | 채택하지 않은 디자인 시안 5종과 표지 이미지 | 로컬 |
 | `plan/` | 합의 사항, 디자인 시스템, 게시 계획, 인수인계 문서 | 로컬 |
 | `resources/` | 계약서, 원고 PDF, 등록정보 이미지 등 원자료 | 로컬, 대외비 포함 |
 | `GLOSSARY.md` | 프로젝트 용어집 | 로컬 |
 
-`site/`에는 `index.html`, `book.html`, `cover.jpg`, `robots.txt`만 둔다. 계약서, 사업자번호, 비용, 개인정보는 `site/`에 넣지 않는다.
+`site/`에는 `index.html`, `book.html`, `cover.jpg`, `robots.txt`, `CNAME`(커스텀 도메인 `ezinpgbooks.co.kr`)만 둔다. 계약서, 사업자번호, 비용, 개인정보는 `site/`에 넣지 않는다.
 
 ## 미리 보기
 빌드가 필요 없다. `site/index.html`을 브라우저로 열면 된다. 글꼴은 Google Fonts를 쓰므로 인터넷 연결이 필요하다.
@@ -34,13 +34,13 @@ msedge --headless --disable-gpu --force-prefers-reduced-motion --window-size=128
 Claude는 로컬 커밋까지만 한다. push와 Pages 설정은 직접 한다.
 1. `site/`에서 `git push -u origin main`
 2. GitHub Settings → Pages: Branch `main`, `/ (root)`
-3. 주소: `https://joshuariver.github.io/izinpgbooks/`
+3. 주소: `https://ezinpgbooks.co.kr/` (Settings → Pages → Custom domain 입력, DNS 설정 필요. 기본 주소는 `https://joshuariver.github.io/ezinpgbooks/`)
 4. 게시 후 점검: 저장소 공개 여부, 본문에 이메일 주소가 글자로 보이지 않는지, `book.html` 링크, 모바일 실기기
 
 모든 페이지는 `noindex`(meta + `robots.txt`)로 검색 노출을 막아 두었다. 2주 검증 뒤 Pages를 끌지, 정식 도메인으로 옮길지 결정한다.
 
 ## 자주 하는 수정
-- **예스24 구매 버튼**: 주소가 생기면 `index.html`, `book.html`의 `<!-- 예스24 주소 확보 시 ... -->` 위치에서 `span.btn`을 `<a class="btn" href="...">`로 바꾼다.
+- **예스24 구매 버튼**: `index.html`, `book.html`의 `a.btn`에 예스24 상품 주소가 연결되어 있다. 주소가 바뀌면 두 파일의 `href`를 함께 고친다.
 - **소개 문구**: 현재 문구는 도서 제목에서 추론한 초안이다. 출판사 방향 한 줄을 받으면 교체한다.
 - **출판사 정보**: 푸터의 소재지와 신고번호는 최신 등록정보(`resources/`의 등록정보 이미지) 기준이다. 전 주소와 옛 번호는 쓰지 않는다.
 
