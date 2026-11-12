@@ -18,9 +18,14 @@
   :root { --mist:#e3e9e7; --sky:#f1f4f2; --far:#b9ccc8; --cela:#7fa39a; --ink:#1f2f35; --seal:#b4423a; }
   * { box-sizing:border-box; }
   body { word-break:keep-all; margin:0; background:var(--mist); color:var(--ink); font:400 1.05rem/1.95 "Noto Serif KR","Nanum Myeongjo",serif; }
-  .banner { background:var(--ink); color:var(--sky); text-align:center; font:.85rem/1 system-ui,"Malgun Gothic",sans-serif; padding:.6rem 1rem; }
   .wrap { max-width:46rem; margin:0 auto; padding:0 16px; }
-  nav { padding:1.2rem 0; font:.9rem system-ui,"Malgun Gothic",sans-serif; }
+  /* 홈으로 돌아가기: 낙관(도장) + 사명. 호버 시 낙관이 왼쪽으로 살짝 움직이고 밑줄이 그어진다 */
+  nav { padding:1.4rem 0; }
+  nav a { display:inline-flex; align-items:center; gap:.7rem; color:var(--ink); text-decoration:none; font:900 .95rem/1 "Noto Serif KR",serif; letter-spacing:.14em; padding:.4rem 0; border-bottom:1px solid transparent; transition:border-color .2s; }
+  nav a::before { content:"이"; content:"이" / ""; display:grid; place-items:center; width:1.7rem; height:1.7rem; background:var(--seal); color:#fbeee8; border-radius:2px; font-size:.85rem; letter-spacing:0; transition:transform .2s; }
+  nav a:hover { border-bottom-color:var(--seal); }
+  nav a:hover::before { transform:translateX(-3px); }
+  @media (prefers-reduced-motion:reduce) { nav a, nav a::before { transition:none; } }
   .top { background:linear-gradient(var(--sky),var(--mist)); padding-bottom:2.5rem; }
   .book { display:flex; gap:2.2rem; flex-wrap:wrap; align-items:flex-start; }
   .book img { width:14rem; max-width:100%; height:auto; box-shadow:0 14px 28px -12px rgba(31,47,53,.45); }
@@ -48,11 +53,9 @@
 </style>
 </head>
 <body>
-<div class="banner" role="note">시안 · 검증용 — 정식 홈페이지가 아닙니다</div>
-
 <div class="top">
   <div class="wrap">
-    <nav><a href="./">← 이진풍경출판사</a></nav>
+    <nav><a href="./" aria-label="이진풍경출판사 홈으로">이진풍경출판사</a></nav>
     <div class="book">
       <img src="cover.jpg" alt="『Human-AI Symbiosis: 공존 2』 표지" width="651" height="921">
       <div>
